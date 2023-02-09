@@ -1,58 +1,30 @@
-// const person: {
-//     name: string;
-//     age: number;
-//     hobbies: string[];
-//     role: [number, string];
-// } = {
-//     name: 'YangSu',
-//     age: 30,
-//     hobbies:['Sports', 'Cooking'],
-//     role: [2, 'author']
-// };
+type Combinable = number | string ;
+type ConversionDescriptor = 'as-number' | 'as-text';
 
-// const ADMIN = 0;
-// const READ_ONLY = 1;
-// const AUTHOR = 2;
-
-enum Role { ADMIN = 100, READ_ONLY = 'author', AUTHOR = 5};
-// 첫번째 원소부터 자동으로 0부터 시작하고 순차적으로 1씩 증가
-// 임의의 숫자를 원하면 첫 원소의 값을 ADMIN=-5 같은걸로 하면 됨
-
-const person = {
-    name: 'Maximilian',
-    age: 30,
-    hobbies: ['Sports', 'Cooking'],
-    role: Role.ADMIN
-};
-
-// person.role.push('admin');
-// person.role = [0, 'admin'];
-let favoriteActivities: string[];
-// let favoriteActivities: any[];  // 혼합 타입 배열
-favoriteActivities = ['Sports'];
-
-console.log(person.name);
-
-for (const hobby of person.hobbies) {
-    console.log(hobby.toUpperCase());
+function combine(
+    input1: Combinable,
+    input2: Combinable,
+    resultConversion: ConversionDescriptor) {
+  let result;
+  if (typeof input1 === 'number' && typeof input2 === 'number'
+        || resultConversion === 'as-number') {
+    result = +input1 + +input2; // '+'를 앞에 붙이면 number가 타입이 된다
+  } else {
+    result = input1.toString() + input2.toString();
+  }
+  return result;
+//   if(resultConversion === 'as-number'){
+//     return parseFloat(result);
+//   } else {
+//     return result.toString();
+//   }  
 }
 
-if (person.role === Role.AUTHOR) {
-    console.log('is admin');
-}
+const combinedAges = combine(30, 26, 'as-number');
+console.log(combinedAges);
 
+const combinedStringAges = combine('30', '26', 'as-number');
+console.log(combinedStringAges);
 
-
-
-
-
-
-/** 
- *  Cannot redeclare block-scoped variable 해결
- *  export {};  //  방법1
- *  방법2 : package.json(또는 tsconfig.json)에 아래 추가
- *  "compilerOptions": {  
- *  "lib" : [ "ES2015"]
- *  }
- * 
- * */ 
+const combinedNames = combine("Max", "Anna", 'as-text');
+console.log(combinedNames);
