@@ -1,7 +1,7 @@
 type Combinable = number | string ;
 type ConversionDescriptor = 'as-number' | 'as-text';
 
-function combine(
+function combine (
     input1: Combinable,
     input2: Combinable,
     resultConversion: ConversionDescriptor) {
@@ -13,6 +13,7 @@ function combine(
     result = input1.toString() + input2.toString();
   }
   return result;
+
 //   if(resultConversion === 'as-number'){
 //     return parseFloat(result);
 //   } else {
