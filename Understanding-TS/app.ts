@@ -1,31 +1,15 @@
-type Combinable = number | string ;
-type ConversionDescriptor = 'as-number' | 'as-text';
+let userInput: unknown; // any와는 다른 타입, 어떤 값이든 저장 가능
+let userName: string;
 
-function combine (
-    input1: Combinable,
-    input2: Combinable,
-    resultConversion: ConversionDescriptor) {
-  let result;
-  if (typeof input1 === 'number' && typeof input2 === 'number'
-        || resultConversion === 'as-number') {
-    result = +input1 + +input2; // '+'를 앞에 붙이면 number가 타입이 된다
-  } else {
-    result = input1.toString() + input2.toString();
-  }
-  return result;
+userInput = 5;
+userInput = 'Really?';
+// userName = userInput; // unknown일땐 오류이나 any일땐 정상
+if(typeof userInput ==='string'){
+    userName = userInput;
+}   // 추가적인 타입검사가 있어야 할당 가능
 
-//   if(resultConversion === 'as-number'){
-//     return parseFloat(result);
-//   } else {
-//     return result.toString();
-//   }  
-}
+function generateError(message: string, code: number){
+    throw {message: message, errorCode : code};
+}   // : never을 설정해 명시적 표현 가능 (반환타입은 같은 void)
 
-const combinedAges = combine(30, 26, 'as-number');
-console.log(combinedAges);
-
-const combinedStringAges = combine('30', '26', 'as-number');
-console.log(combinedStringAges);
-
-const combinedNames = combine("Max", "Anna", 'as-text');
-console.log(combinedNames);
+generateError('An error Occurred', 505);
