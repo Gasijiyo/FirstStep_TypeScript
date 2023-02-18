@@ -99,10 +99,10 @@
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
-  },
-  "exclude": [  
-    "node_modules"  // would be the default
-  ], 
+  }
+  // "exclude": [  
+  //   "node_modules"  // would be the default
+  // ], 
   // "include":[
   //   "app.ts"     // include가 있으면 이 파일들만 컴파일 실행
   // ]
